@@ -2,22 +2,27 @@ from bs4 import BeautifulSoup as bs
 import requests
 import pandas as pd
 
+
 url = 'https://en.wikipedia.org/wiki/List_of_brown_dwarfs'
 
 page = requests.get(url)
+print(page)
 
 soup = bs(page.text,'html.parser')
 
 star_table = soup.find_all('table')
+print(len(star_table))
+
 
 temp_list= []
-
-table_rows = star_table[7].find_all('tr')
-
+table_rows = star_table[4].find_all('tr')
 for tr in table_rows:
     td = tr.find_all('td')
     row = [i.text.rstrip() for i in td]
     temp_list.append(row)
+print(temp_list)
+
+
 
 Star_names = []
 Distance =[]
